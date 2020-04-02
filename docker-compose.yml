@@ -2,9 +2,12 @@ version: "2"
 services:
   stowage:
     build: .
+    image: stowage
     container_name: stowage
+    volumes:
+      - ./resources:/resources
     ports:
-      - "8084:8084"
+      - "80:80"
     depends_on:
       - mongo 
   mongo:

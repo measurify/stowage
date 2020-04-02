@@ -5,19 +5,14 @@
   "main": "server.js",
   "host": "localhost",
   "scripts": {
-    "mongo": "mongod --config /usr/local/etc/mongod.conf",
     "test": "mocha --timeout 20000 --exit --use_strict",
     "dev": "nodemon ./api.js dev",
-    "prod": "node --max_old_space_size=4096 ./api.js prod",
-    "docker": "node --max_old_space_size=4096 ./api.js docker",
-    "start": "node --max_old_space_size=4096 api.js",
-    "inspect": "node --max_old_space_size=4096 --inspect api.js",
-    "profile": "node --max_old_space_size=4096 profile.js",
-    "debug": "nodemon --max_old_space_size=4096 --inspect api.js dev"
+    "prod": "node ./api.js prod",
+    "docker": "pm2-runtime start ./api.js -- docker"
   },
   "repository": {
     "type": "git",
-    "url": "git+"
+    "url": "git+https://github.com/Atmosphere-IoT-Framework/stowage-service-api"
   },
   "keywords": [
     "API",
@@ -27,7 +22,7 @@
   ],
   "author": "Riccardo Berta",
   "license": "MIT",
-  "homepage": "https://",
+  "homepage": "https://github.com/Atmosphere-IoT-Framework/stowage-service-api",
   "dependencies": {
     "@types/mongoose-geojson-schema": "^2.1.3",
     "bcryptjs": "^2.4.3",
@@ -38,9 +33,10 @@
     "dev-env": "^1.0.4",
     "dotenv": "^5.0.1",
     "express": "^4.17.1",
-    "greenlock-express": "^2.7.18",
     "json5": "^2.1.1",
     "jsonwebtoken": "^8.5.1",
+    "le-acme-core": "^2.1.4",
+    "le-sni-auto": "^2.1.9",
     "mathjs": "^5.10.3",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.2",

@@ -12,22 +12,10 @@ const fs = require('fs');
 const compression = require('compression');
 
 // https credentials
-let cert_file;
-let key_file;
-// self-signed no ssl on local
-if (process.env.ENV === 'development' || process.env.ENV === 'test') {
-    cert_file = './resources/caCert.pem'; // The certificate
-    key_file = './resources/privateKey.pem'; // The private key
-}
-// authority signed ssl enable on remote (renew certificate every 3-months!)
-else if(process.env.ENV === 'production'){
-    cert_file = './resources/fullchain.pem'; // The certificate
-    key_file = './resources/privkey.pem'; // The private key
-}
-if (process.env.ENV === 'docker') {
-    cert_file = './resources/caCert-docker.pem'; // The certificate
-    key_file = './resources/privateKey-docker.pem'; // The private key
-}
+const  cert_file = './resources/certificate.pem'; // The certificate
+const key_file = './resources/key.pem'; // The private key
+const cert_file_self = './resources/self-certificate.pem'; // The self-signed certificate
+const key_file_self = './resources/self-key.pem'; // The self-signed private key
 
 // Express server
 const app = express();
@@ -113,8 +101,14 @@ try {
     const instance = server.listen(443, () => { console.log('Wondertech Stowage Service is running on port ' +  instance.address().port); });
 }
 catch(err) {
-    server = http.createServer(app);
-    const instance = app.listen(8084, "0.0.0.0", () => { console.log('WARNING: HTTPS not running, Wondertech Stowage Service is running on port ' +  instance.address().port + ' (' + err + ')'); });
-}
+    try {
+        const config = { key: fs.readFileSync(key_file_self), cert: fs.readFileSync(cert_file_self), passphrase: process.env.HTTPSSECRET };
+        server = https.createServer(config, app );
+        const instance = server.listen(443, () => { console.log('WARNING: certificate not found, using a self-signed one, Wondertech Stowage Service is running on port ' +  instance.address().port); });
+    }
+    catch(err) {
+        server = http.createServer(app);
+        const instance = app.listen(process.env.PORT, "0.0.0.0", () => { console.log('WARNING: HTTPS not running, Wondertech Stowage Service is running on port ' +  instance.address().port + ' (' + err + ')'); });
+    }}
 
 module.exports = server;
