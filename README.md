@@ -194,42 +194,43 @@ The Stowage Service is developed using [Node JS](https://nodejs.org/en/) and [Mo
 
 ### Istall MongoDB and NodeJS
 
-- Install Mongo DB
-- Start Mongo DB as a service
+Install Mongo DB
+
+Start Mongo DB as a service
 
     sudo service mongod start
 
-- Verify that MongoDB has started successfully
+Verify that MongoDB has started successfully
 
     tail /var/log/mongodb/mongod.log
     check for "[initandlisten] waiting for connections on port 27017"
 
-- Run MongoDB at startup
+Run MongoDB at startup
 
     sudo systemctl enable mongod.service NodeJS 
 
-- Install NodeJS and NPM
+Install NodeJS and NPM
 
 ### Install the API
 
-- Make a web folder
+Make a web folder
 
     cd ~
     mkdir ~/www
     cd ~/www
 
-- Install forever globally
+Install forever globally
 
     cd ~
     sudo npm install -g forever
 
-- Forward the port from 8084 to 80
+Forward the port from 8084 to 80
 
     export PORT=8084
     sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8084 
     sudo apt-get install iptables-persistent
 
-- Get Atmosphere API code
+Get Atmosphere API code
 
     cd ~/www
     sudo git clone https://github.com/Atmosphere-IoT-Framework/api.git
@@ -237,7 +238,7 @@ The Stowage Service is developed using [Node JS](https://nodejs.org/en/) and [Mo
     sudo npm install
     npm run-script prod
 
-- Setup environments
+Setup environments
 
 Stowage can run in tree different modes: "prod" (for production), "dev" (to run the code using the [nodemon](https://www.npmjs.com/package/nodemon) tool) and "test" (to execute the unit test suite). It is possible to select the enviroment using a command line parameter:
 
@@ -261,7 +262,7 @@ Each environment has a configuration file "variable.dev.env", "variables.prod.en
 
 In particular, the connection string with the database and administrator credential (at startup Stowage will create a admin user with these credential), the expiration time of tokens, the log level, the secret word for the HTTPS certificate file and the secret word for the JWT token.
 
-- Setup to run the API in production
+Setup to run the API in production
 
 We suggest to use a process manager for NodeJS, like [pm2](https://pm2.keymetrics.io/)
 
@@ -271,7 +272,7 @@ We suggest to use a process manager for NodeJS, like [pm2](https://pm2.keymetric
     sudo pm2 save 
     sudo pm2 startup
 
-- Check if it's working
+Check if it's working
 
     curl localhost
     curl localhost 8084
@@ -281,7 +282,7 @@ We suggest to use a process manager for NodeJS, like [pm2](https://pm2.keymetric
 Stowage API can support both HTTP and HTTPS. Without certificate, the API starts using HTTP. However we reccomend to get a valid certificate from a authority. In the following we provide instruction to add a certificate from [Let's Encript](https://letsencrypt.org/), a free, automated and open Certificate Authority.
 Detailed instruction can be found at [Certbot instruction](https://certbot.eff.org/instructions)
 
-- Add Certbot PPA
+Add Certbot PPA
 
     sudo apt-get update
     sudo apt-get install software-properties-common
@@ -289,32 +290,32 @@ Detailed instruction can be found at [Certbot instruction](https://certbot.eff.o
     sudo add-apt-repository ppa:certbot/certbot
     sudo apt-get update
 
-- Install Certbot
+Install Certbot
 
     sudo apt-get install certbot
 
-- Run API, it should run on HTTP, check if it is true
+Run API, it should run on HTTP, check if it is true
 
     sudo netstat -tulpn 
 
-- Use Certbot
+Use Certbot
 
     sudo certbot certonly --manual
 
 provide your domain name: (e.g. my.stowage.com)
 
-- Provide a file for the authority
+Provide a file for the authority
 
     cd ~/www/api/public/.well-known/acme-challenge/
     sudo nano [the file name provided by certbot]
     copy contents provided by certbot inside the previously created file
 
-- Copy certificates
+Copy certificates
 
     sudo cp /etc/letsencrypt/live/my.stowage.com/fullchain.pem ~/www/api/resources/fullchain.pem
     sudo cp /etc/letsencrypt/live/my.stowage.com/privkey.pem ~/www/api/resources/privkey.pem
 
-- Restart API
+Restart API
 
     sudo pm2 stop api
     sudo pm2 start api
@@ -328,14 +329,13 @@ provide your domain name: (e.g. my.stowage.com)
     Stop API: sudo pm2 start api
     Check API: sudo pm2 show api
 
-
 ## Containerization
 
-- Build Docker image
+Build Docker image
 
     docker image build -t stowage-api .
 
-- Run Docker container
+Run Docker container
 
     docker container run -p 5000:5000 -d stowage-api
 
