@@ -331,13 +331,9 @@ Restart API
 
 ## Containerization
 
-Build Docker image
+Build Docker image and run the container
 
-    docker image build -t stowage-api .
-
-Run Docker container
-
-    docker container run -p 5000:5000 -d stowage-api
+    docker-compose up  
 
 ## Host on Heroku
 

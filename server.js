@@ -25,8 +25,8 @@ else if(process.env.ENV === 'production'){
     key_file = './resources/privkey.pem'; // The private key
 }
 if (process.env.ENV === 'docker') {
-    cert_file = './resources/docker-caCert.pem'; // The certificate
-    key_file = './resources/docker-privateKey.pem'; // The private key
+    cert_file = './resources/caCert.pem'; // The certificate
+    key_file = './resources/privateKey.pem'; // The private key
 }
 
 // Express server

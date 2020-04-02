@@ -1,13 +1,15 @@
 version: "2"
 services:
-  atmosphere:
-    image: atmosphereframework/atmosphere-api:latest
+  stowage:
+    build: .
+    container_name: stowage
     ports:
       - "8084:8084"
     depends_on:
       - mongo 
   mongo:
     image: mongo
+    container_name: mongo
     volumes:
         - ./data:/data/db
     ports:
