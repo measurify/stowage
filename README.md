@@ -214,6 +214,12 @@ Run API
     cd ~/www/api
     sudo docker-compose up -build
 
+Update API
+
+    cd ~/www/api
+    sudo docker-compose up -build
+    sudo git pull
+
 ## Developer information
 
 Stowage Service can run in tree different modes:
@@ -266,30 +272,5 @@ Use Certbot (modify in order to provide your domain)
 
 Copy certificates
 
-    sudo cp /etc/letsencrypt/live/stowage.atmosphere.tools/fullchain.pem ~/www/api/resources/certificare.pem
+    sudo cp /etc/letsencrypt/live/stowage.atmosphere.tools/fullchain.pem ~/www/api/resources/certificate.pem
     sudo cp /etc/letsencrypt/live/stowage.atmosphere.tools/privkey.pem ~/www/api/resources/key.pem
-
-
-----
-Restart API
-
-    sudo pm2 stop api
-    sudo pm2 start api
-    It should run on HTTPS: sudo netstat -tulpn
-
-### Useful Commands
-
-    Stop MongoDB: sudo service mongod stop  
-    Restart MongoDB: sudo service mongod restart
-    Start API: sudo pm2 stop api
-    Stop API: sudo pm2 start api
-    Check API: sudo pm2 show api
-
-## Host on Heroku
-
-    heroku login
-    heroku container:login
-    heroku create stowage --region eu
-    heroku container:push web --app stowage  
-    heroku container:release web --app stowage
-

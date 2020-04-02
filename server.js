@@ -12,7 +12,7 @@ const fs = require('fs');
 const compression = require('compression');
 
 // https credentials
-const  cert_file = './resources/certificate.pem'; // The certificate
+const cert_file = './resources/certificate.pem'; // The certificate
 const key_file = './resources/key.pem'; // The private key
 const cert_file_self = './resources/self-certificate.pem'; // The self-signed certificate
 const key_file_self = './resources/self-key.pem'; // The self-signed private key
