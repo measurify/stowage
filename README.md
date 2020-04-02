@@ -1,6 +1,6 @@
 # Stowage Service
 
-This is a RESTful service to **store in pesistent way JSON/XML/etc. entities called "Elements" on the Cloud**  
+This is a RESTful service to **store in a persistent way JSON/XML/etc. entities called "Elements" on the Cloud**  
 
 In order to use the service, you need a Stowage account (username and password) and an online server running the service ({{url}})
 Ask info@wondertechweb.com to get a valid account and a server URL.
@@ -232,7 +232,7 @@ The Stowage Service is developed using [Node JS](https://nodejs.org/en/) and [Mo
 - Get Atmosphere API code
 
     cd ~/www
-    sudo git clone https://github.com/Atmosphere-IoT-Framework/api.git 
+    sudo git clone https://github.com/Atmosphere-IoT-Framework/api.git
     cd api/
     sudo npm install
     npm run-script prod
