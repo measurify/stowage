@@ -5,6 +5,12 @@ This is a RESTful service to **store in a persistent way JSON/XML/etc. entities 
 In order to use the service, you need a Stowage account (username and password) and an online server running the service ({{url}})
 Ask info@wondertechweb.com to get a valid account and a server URL.
 
+## Quick start
+
+Build Docker image and run the container
+
+    docker-compose up  
+
 ## Use
 
 Resources can be accessed with a token than can be obtained with the following call:
@@ -328,12 +334,6 @@ Restart API
     Start API: sudo pm2 stop api
     Stop API: sudo pm2 start api
     Check API: sudo pm2 show api
-
-## Containerization
-
-Build Docker image and run the container
-
-    docker-compose up  
 
 ## Host on Heroku
 

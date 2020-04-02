@@ -13,8 +13,7 @@ if(!['dev', 'prod', 'test', 'docker'].includes(process.argv[2])) {
   console.log('Unknown environment (' + process.argv[2] + '), please run with dev, prod, test, docker or http \n');
   process.exit();
 }
-if(process.argv[2] == 'docker') require('dotenv').config({ path: '/init/variables.env' });
-else require('dotenv').config({ path: 'variables.' + process.argv[2] + '.env' });
+require('dotenv').config({ path: 'variables.' + process.argv[2] + '.env' });
 console.log(process.argv[2].toUpperCase() + ' Environment');
 
 // Start database
