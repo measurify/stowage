@@ -212,13 +212,13 @@ Get the API
 Run API
 
     cd ~/www/api
-    sudo docker-compose up -build
+    sudo docker-compose up -d
 
 Update API
 
     cd ~/www/api
-    sudo docker-compose up -build
     sudo git pull
+    sudo docker-compose up -d
 
 ## Developer information
 
@@ -250,7 +250,7 @@ Each environment has a configuration file "variable.dev.env", "variables.prod.en
 
 In particular, the connection string with the database and administrator credential (at startup Stowage will create a admin user with these credential), the expiration time of tokens, the log level, the secret word for the HTTPS certificate file and the secret word for the JWT token.
 
-### HTTPS Certificatesd
+### HTTPS Certificates
 
 Stowage API can support both HTTP and HTTPS. Without certificate, the API starts using a self-signed certificate (stored in the resources forlder) or in HTTP (if also the self-signed certificate is missing). It is reccomended to get a valid certificate from a authority. 
 In the following, we provide instruction to add a certificate from [Let's Encript](https://letsencrypt.org/), a free, automated and open Certificate Authority. Detailed instruction can be found at [Certbot instruction](https://certbot.eff.org/instructions)
@@ -274,3 +274,13 @@ Copy certificates
 
     sudo cp /etc/letsencrypt/live/stowage.atmosphere.tools/fullchain.pem ~/www/api/resources/certificate.pem
     sudo cp /etc/letsencrypt/live/stowage.atmosphere.tools/privkey.pem ~/www/api/resources/key.pem
+
+Update certificates
+
+    sudo docker stop stowage
+    sudo certbot certonly --standalone --preferred-challenges http -d stowage.atmosphere.tools
+    sudo cp /etc/letsencrypt/live/stowage.atmosphere.tools/fullchain.pem ~/www/api/resources/certificate.pem
+    sudo cp /etc/letsencrypt/live/stowage.atmosphere.tools/privkey.pem ~/www/api/resources/key.pem
+    sudo docker rmi Image stowage
+    sudo docker-compose up -d
+    
