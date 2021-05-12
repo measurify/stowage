@@ -37,7 +37,7 @@
     "jsonwebtoken": "^8.5.1",
     "le-acme-core": "^2.1.4",
     "le-sni-auto": "^2.1.9",
-    "mathjs": "^5.10.3",
+    "mathjs": "^7.5.1",
     "mongodb": "^3.5.4",
     "mongoose": "^5.9.2",
     "mongoose-autopopulate": "^0.9.1",
