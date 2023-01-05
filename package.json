@@ -33,7 +33,7 @@
     "dev-env": "^1.0.4",
     "dotenv": "^5.0.1",
     "express": "^4.17.1",
-    "json5": "^2.1.1",
+    "json5": "^2.2.2",
     "jsonwebtoken": "^8.5.1",
     "le-acme-core": "^2.1.4",
     "le-sni-auto": "^2.1.9",
